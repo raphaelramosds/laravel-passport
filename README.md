@@ -36,3 +36,7 @@ Set the following enviroment variables accordingly with the clients secrets
 PASSPORT_CLIENT_SECRET_1=
 PASSPORT_CLIENT_SECRET_2=
 ```
+
+## Reference
+
+- [Laravel Passport](https://laravel.com/docs/8.x/passport)
