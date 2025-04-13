@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use Exception;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\SignUpRequest;
+use App\Mail\ForgotPasswordMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -69,6 +74,39 @@ class AuthController extends Controller
                 'message' => 'Registration failed',
                 'error' => $e->getMessage(),
             ], 500);
+        }
+    }
+    
+    public function forgotPassword(Request $request)
+    {
+        if (!$email = $request->email) {
+            return response()->json([
+                'message' => 'Email is required',
+            ], 422);
+        }
+
+        if (User::where('email', $email)->exists()) 
+        {
+            $token = Hash::make($email . '' . now());
+
+            DB::table('password_resets')->insert([
+                'email' => $email,
+                'token' => $token,
+                'created_at' => now(),
+            ]);
+
+            Mail::to($email)->send(new ForgotPasswordMail($token));
+
+            return response()->json([
+                'message' => 'Password reset link sent to your email',
+            ], 200);
+        }
+        
+        else 
+        {
+            return response()->json([
+                'message' => 'User not found',
+            ], 404);
         }
     }
 }
