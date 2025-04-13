@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\SignUpRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +44,7 @@ class AuthController extends Controller
         ], 401);
     }
 
-    public function register(RegisterRequest $request)
+    public function signup(SignUpRequest $request)
     {
         try 
         {
