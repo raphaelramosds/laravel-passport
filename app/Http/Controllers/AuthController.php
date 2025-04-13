@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Exception;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\SignUpRequest;
 use App\Mail\ForgotPasswordMail;
 use App\Models\User;
