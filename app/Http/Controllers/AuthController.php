@@ -139,4 +139,9 @@ class AuthController extends Controller
             'message' => 'Password reset successfully',
         ], 200);
     }
+
+    public function user() 
+    {
+        return Auth::user();
+    }
 }

@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Fetch authenticated user
+Route::get('/user', [AuthController::class, 'user'])->middleware('auth:api')->name('user');
+
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot-password');
