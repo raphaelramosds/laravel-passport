@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\SignUpRequest;
 use App\Mail\ForgotPasswordMail;
 use App\Models\User;
@@ -107,5 +108,35 @@ class AuthController extends Controller
                 'message' => 'User not found',
             ], 404);
         }
+    }
+
+    public function resetPassword(ResetPasswordRequest $request) 
+    {
+        $email = $request->email;
+        $token = $request->token;
+        $password = $request->password;
+
+        $passwordReset = DB::table('password_resets')->where('email', $email)->where('token', $token)->first();
+        if (!$passwordReset) {
+            return response()->json([
+                'message' => 'Invalid token or email',
+            ], 422);
+        }
+
+        $user = User::where('email', $email)->first();
+        if (!$user) {
+            return response()->json([
+                'message' => 'User not found',
+            ], 404);
+        }
+
+        $user->password = Hash::make($password);
+        $user->save();
+
+        DB::table('password_resets')->where('email', $email)->delete();
+
+        return response()->json([
+            'message' => 'Password reset successfully',
+        ], 200);
     }
 }
