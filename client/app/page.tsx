@@ -1,8 +1,7 @@
 export default function Page() {
   return (
-    <div>
-      <h1>Hello, Next.js + Docker!</h1>
-      <p>Integration with Nginx will come soon...</p>
+    <div className="container mt-5">
+      <h1>Home Page</h1>
     </div>
   );
 }
