@@ -24,7 +24,7 @@ export default function RootLayout({
                 <Link href="/" className="nav-link">Home</Link>
               </li>
               <li className="nav-item">
-                <Link href="#" className="nav-link">Profile</Link>
+                <Link href="/profile" className="nav-link">Profile</Link>
               </li>
             </ul>
             <ul className="navbar-nav mr-right">
