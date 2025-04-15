@@ -2,17 +2,31 @@ version: "3.7"
 
 services:
 
-  app:
-    container_name: app
+  server:
+    container_name: server
     build:
-      context: .
+      context: ./server
       dockerfile: Dockerfile
-    image: laravel-8.x:latest
+    image: laravel-8.x:local
     restart: unless-stopped
     volumes:
-      - ./:/var/www/html
+      - ./server:/var/www/html
     depends_on:
       - db
+    
+  client:
+    container_name: client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: node:local
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./client:/var/www/html
+    depends_on:
+      - server
   
   db:
     container_name: db
@@ -33,5 +47,5 @@ services:
       ports:
         - "89:80"
       volumes:
-        - ./:/var/www/html
-        - ./docker/nginx/:/etc/nginx/conf.d/
+        - ./server:/var/www/html
+        - ./server/docker/nginx:/etc/nginx/conf.d/
