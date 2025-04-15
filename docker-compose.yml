@@ -35,14 +35,14 @@ services:
     image: mysql:8.3
     restart: unless-stopped
     environment:
-      # same value of DB_DATABASE
+      # fill with the same value of DB_DATABASE on .env
       MYSQL_DATABASE: laravel
 
-      # same value of DB_PASSWORD
+      # fill with the same value of DB_PASSWORD on .env
       MYSQL_ROOT_PASSWORD: passport
       MYSQL_PASSWORD: passport
 
-      # same value of DB_USERNAME
+      # fill with the same value of DB_USERNAME on .env
       MYSQL_USER: passport
     ports:
       - "3389:3306"
