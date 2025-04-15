@@ -13,6 +13,8 @@ services:
       - ./server:/var/www/html
     depends_on:
       - db
+    env_file:
+      - ./server/.env
     
   client:
     container_name: client
@@ -33,12 +35,17 @@ services:
     image: mysql:8.3
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE:-database}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-password}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-password}
-      MYSQL_USER: ${DB_USERNAME:-username}
+      # same value of DB_DATABASE
+      MYSQL_DATABASE: laravel
+
+      # same value of DB_PASSWORD
+      MYSQL_ROOT_PASSWORD: passport
+      MYSQL_PASSWORD: passport
+
+      # same value of DB_USERNAME
+      MYSQL_USER: passport
     ports:
-        - "3389:3306"
+      - "3389:3306"
 
   nginx:
       container_name: nginx

@@ -27,7 +27,7 @@ docker exec app composer require laravel/passport
 Install passport
 
 ```
-docker exec app composer require php artisan passport:install
+docker exec app php artisan passport:install
 ```
 
 Set the following enviroment variables accordingly with the clients secrets
