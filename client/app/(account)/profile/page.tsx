@@ -14,6 +14,7 @@ export default function Profile() {
     });
 
     useEffect(() => {
+        // REASSESS: Search how Next.js stores token in local storage without 'use client'
         const token = localStorage.getItem('token');
 
         if (!token) {

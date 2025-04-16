@@ -32,6 +32,7 @@ export default function Login() {
             }
         })
             .then((response) => {
+                // REASSESS: Search how Next.js stores token in local storage without 'use client'
                 localStorage.setItem('token', response.data.token);
                 setLoggedIn(true);
                 alert("Login successful");
